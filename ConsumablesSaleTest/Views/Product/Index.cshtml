@@ -1,13 +1,13 @@
-﻿@model IEnumerable<ConsumablesSaleTest.Models.Type>
+﻿@model IEnumerable<ConsumablesSaleTest.Models.Product>
 
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-primary">Список типов</h2>
+            <h2 class="text-primary">Каталог товаров</h2>
         </div>
         <div class="col-6 text-right">
-            <a asp-controller="Type" asp-action="Create" class="btn btn-primary">
-                <i class="las la-lg la-plus"></i> Добавить тип
+            <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
+                <i class="las la-lg la-plus"></i> Добавить товар
             </a>
         </div>
     </div>
@@ -18,13 +18,16 @@
             <thead>
                 <tr>
                     <th>
-                        Название типа
+                        Название товара
                     </th>
                     <th>
-                        Порядок отображения
+                        Цена
                     </th>
-                    <th class="text-center">
-
+                    <th>
+                        Тип расходника
+                    </th>
+                    <th>
+                        Совместимость
                     </th>
                 </tr>
             </thead>
@@ -32,14 +35,16 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td width="50%">@item.Name</td>
-                        <td width="30%">@item.DisplayOrder</td>
+                        <td width="25%">@item.Name</td>
+                        <td width="15%">@item.Price</td>
+                        <td width="25%">@item.Type.Name</td>
+                        <td width="15%">@item.Developer.Name</td>
                         <td class="text-center">
                             <div class="w-75 btn-group" role="group">
-                                <a asp-controller="Type" asp-route-Id="@item.Id" asp-action="Edit" class="btn btn-primary mx-1">
+                                <a asp-controller="Product" asp-route-Id="@item.Id" asp-action="Upsert" class="btn btn-primary mx-1">
                                     <i class="lar la-lg la-edit"></i>
                                 </a>
-                                <a asp-controller="Type" asp-route-Id="@item.Id" asp-action="Delete" class="btn btn-danger mx-1">
+                                <a asp-controller="Product" asp-route-Id="@item.Id" asp-action="Delete" class="btn btn-danger mx-1">
                                     <i class="lar la-lg la-trash-alt"></i>
                                 </a>
                             </div>
@@ -54,4 +59,5 @@
         <p>Список пуст</p>
     }
 </div>
+
 

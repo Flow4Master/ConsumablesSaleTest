@@ -1,0 +1,193 @@
+﻿@model ConsumablesSaleTest.Models.ViewModels.ProductVM
+
+@{
+    var title = "Добавить товар";
+}
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+    @if (Model.Product.Id != 0)
+    {
+        title = "Редактировать товар";
+        <input asp-for="Product.Id" hidden />
+    }
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-info pl-3">@title</h2>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Product.Name">Название</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.Name" class="form-control" />
+                        <span asp-validation-for="Product.Name" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Product.Price">Цена</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.Price" class="form-control" />
+                        <span asp-validation-for="Product.Price" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Product.ArticleNumber">Артикул</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.ArticleNumber" class="form-control" />
+                        <span asp-validation-for="Product.ArticleNumber" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        Фото
+                    </div>
+                    <div class="col-8">
+                        <input type="file" name="files" id="uploadBox" multiple class="form-control" />
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Product.Resource">Ресурс, стр</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.Resource" class="form-control" />
+                        <span asp-validation-for="Product.Resource" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Product.Color">Цвет</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.Color" class="form-control" />
+                        <span asp-validation-for="Product.Color" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Product.Compatibility">Совместимые аппараты</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.Compatibility" class="form-control" />
+                        <span asp-validation-for="Product.Compatibility" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Product.Description">Описание</label>
+                    </div>
+                    <div class="col-8">
+                        <textarea asp-for="Product.Description" class="form-control summernote"></textarea>
+                        <span asp-validation-for="Product.Description" class="text-danger"></span>
+                    </div>
+
+                </div>
+               
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Product.TypeId">Тип печати </label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="Product.TypeId" asp-items="Model.TypeSelectList" class="form-control">
+                            <option selected disabled>Выбрать тип печати</option>
+                        </select>
+                        <span asp-validation-for="Product.TypeId" class="text-danger"></span>
+                    </div>
+
+                </div>
+                 <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Product.DeveloperId">Совместимость</label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="Product.DeveloperId" asp-items="Model.DeveloperSelectList" class="form-control">
+                            <option selected disabled>Выбрать совместимость</option>
+                        </select>
+                        <span asp-validation-for="Product.DeveloperId" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Product.DeveloperId">Тип расходника</label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="Product.Original" asp-items="Html.GetEnumSelectList<Original>()" class="form-control">
+                            <option selected disabled>Выбрать тип расходника</option>
+                        </select>
+                        <span asp-validation-for="Product.Original" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+
+                        <div class="col">
+                            @if (Model.Product.Id != 0)
+                            {
+                                <input type="submit" class="btn btn-info w-100" value="Изменить" />
+                            }
+                            else
+                            {
+                                <input type="submit" onclick="return validateInput()" class="btn btn-primary w-100" value="Добавить" />
+                            }
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success w-100">Отменить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                @* Keep this empty *@
+                @if (Model.Product.Id != 0)
+                {
+                    <img src="@Constant.ImagePath@Model.Product.Img" class="w-100" style="border-radius:5px; border:1px; solid:#bbb" />
+                }
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <script>
+        $(document).ready(function () {
+            $('.summernote').summernote({
+            height:120
+            });
+        });
+        function validateInput() {
+            if(document.getElementById("uploadBox").value == ""){
+                Swal.fire(
+                    'Ошибка!',
+                    'Необходимо загрузить фото!',
+                    'error'
+                )
+                return false;
+            }
+            return true;
+        }
+    </script>
+}
+
+
+
+
