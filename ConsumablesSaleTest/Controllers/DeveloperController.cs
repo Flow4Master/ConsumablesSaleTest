@@ -33,7 +33,7 @@ namespace ConsumablesSaleTest.Controllers
             { 
                 _context.Developers.Add(developer);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             return View(developer);
         }
@@ -57,7 +57,7 @@ namespace ConsumablesSaleTest.Controllers
             {
                 _context.Developers.Update(developer);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             return View(developer);
         }
@@ -83,7 +83,7 @@ namespace ConsumablesSaleTest.Controllers
                 return NotFound();
             _context.Developers.Remove(develop);
             _context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
     }
 }

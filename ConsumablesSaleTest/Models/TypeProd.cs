@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ConsumablesSaleTest.Models
 {
-    public class Type
+    public class TypeProd
     {
         [Key]
         public int Id { get; set; }

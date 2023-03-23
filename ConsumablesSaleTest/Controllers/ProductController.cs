@@ -26,7 +26,7 @@ namespace ConsumablesSaleTest.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Product> productList = _context.Products.Include(x => x.Type).Include(x => x.Developer);
+            IEnumerable<Product> productList = _context.Products.Include(x => x.TypeProd).Include(x => x.Developer);
             //foreach (var item in productList)
             //{
             //    item.Type = _context.Types.FirstOrDefault(x => x.Id == item.TypeId);
@@ -115,7 +115,7 @@ namespace ConsumablesSaleTest.Controllers
                     _context.Update(productVM.Product);
                 }
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             productVM.TypeSelectList = _context.Types.Select(x => new SelectListItem
             {
@@ -135,7 +135,7 @@ namespace ConsumablesSaleTest.Controllers
         {
             if (id == 0 || id == null)
                 return NotFound();
-            var product = _context.Products.Include(x => x.Type).Include(x => x.Developer).FirstOrDefault(x => x.Id == id);
+            var product = _context.Products.Include(x => x.TypeProd).Include(x => x.Developer).FirstOrDefault(x => x.Id == id);
             if (product == null)
                 return NotFound();
             return View(product);
@@ -153,8 +153,7 @@ namespace ConsumablesSaleTest.Controllers
                 System.IO.File.Delete(fileToDelete);
             _context.Products.Remove(prodFromDb);
             _context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
-
     }
 }

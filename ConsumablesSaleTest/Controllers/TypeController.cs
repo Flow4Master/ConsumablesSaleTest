@@ -17,7 +17,7 @@ namespace ConsumablesSaleTest.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Type> typeList = _context.Types;
+            IEnumerable<TypeProd> typeList = _context.Types;
             return View(typeList);
         }
 
@@ -29,13 +29,13 @@ namespace ConsumablesSaleTest.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Type type)
+        public IActionResult Create(TypeProd type)
         {
             if (ModelState.IsValid)
             {
                 _context.Types.Add(type);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             return View(type);
         }
@@ -53,13 +53,13 @@ namespace ConsumablesSaleTest.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Type type)
+        public IActionResult Edit(TypeProd type)
         {
             if (ModelState.IsValid)
             {
                 _context.Types.Update(type);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             return View(type);
         }
@@ -84,7 +84,7 @@ namespace ConsumablesSaleTest.Controllers
                 return NotFound(id);
             _context.Types.Remove(type);
             _context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
     }

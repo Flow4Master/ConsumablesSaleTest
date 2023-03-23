@@ -1,0 +1,102 @@
+﻿@model ConsumablesSaleTest.Models.ViewModels.CatalogVM
+
+@{
+    ViewData["Title"] = "Купить картриджи для принтеров - Каталог";
+}
+
+<div class="container p-3">
+    <div>
+        <partial name="_ProductSearchPartial" />
+    </div>
+    <div class="row pt-2">
+        <div class="col-6">
+            <h2 class="text-primary pb-2">Каталог товаров</h2>
+        </div>
+
+        <form method="get">
+            <div class="row">
+                <div class="col-12 pl-4">
+                    <div class="form-inline form-group">
+
+                        @*<label class="control-label p-2">Модель: </label>
+                        <input name="search" class="form-control" />*@
+                        <label class="control-label p-2">Производитель: </label>
+                        <select name="developer" asp-for="@Model.DevId" asp-items="Model.Developers" class="form-control"></select>
+                        <label class="control-label p-2">Тип печати: </label>
+                        <select name="typeProd" asp-for="@Model.TypId" asp-items="Model.Types" class="form-control"></select>
+
+                        <label class="control-label p-2">Тип расходника: </label>
+                        <select name="original" asp-for="@Model.Original" asp-items="Html.GetEnumSelectList<Original>()" class="form-control"></select>
+
+                        <div class="p-2">
+                            <input type="submit" value="Применить" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="container pt-2">
+            @if (Model.Products.Count() > 0)
+            {
+                <div class="row">
+                    @foreach (var item in Model.Products)
+                    {
+                        <partial name="_ProductCardPartial" model="item" />
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-center">Ничего не найдено. Измените критерии отбора или воспользуйтесь формой поиска по названию модели картриджа.</p>
+            }
+        </div>
+    </div>
+</div>
+
+@*<div class="container">
+    <div class="text-center">
+    <button class="btn btn-dark filter-button" data-filter="all">Все</button>
+    @foreach (var item in Model.Developers)
+    {
+    <button class="btn btn-outline-secondary filter-button" data-filter="@item.Name.Replace(" ","_")">@item.Name</button>
+    }
+    </div>
+    <br />
+    <div class="text-center">
+    <button class="btn btn-dark filter-button" data-filter="all">Все</button>
+    @foreach (var item in Model.Types)
+    {
+    <button class="btn btn-outline-secondary filter-button" data-filter="@item.Name.Replace(" ","_")">@item.Name</button>
+    }
+    </div>
+    <br />
+    <div class="row">
+    @foreach (var item in Model.Products)
+    {
+    <partial name="_ProductCardPartial" model="item"/>
+    }
+    </div>
+    </div>
+
+    @section Scripts{
+    <script>
+    $(document).ready(function () {
+
+    $(".filter-button").click(function () {
+
+    var value = $(this).attr('data-filter');
+    if (value == "all") {
+    $('.filter').show('1000');
+    }
+    else {
+    $(".filter").not('.' + value).hide('3000');
+    $('.filter').filter('.' + value).show('3000');
+
+    }
+    });
+
+    });
+    </script>
+    }*@
+

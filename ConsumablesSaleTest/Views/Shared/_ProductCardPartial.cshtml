@@ -1,0 +1,27 @@
+﻿@model ConsumablesSaleTest.Models.Product
+
+<div class="col-lg-4 col-md-6 pb-4">
+    <!-- Card-->
+    <div class="card bg-white rounded shadow-sm" style="border:1px solid #222">
+        <div class="card-body px-3 pt-2 pb-0 row">
+            <div class="col-7"><label class="float-left">@Model.Name</label></div>
+            <div class="col-5"><label class="float-right"><span class="text-info h5">@string.Format("{0:c0}", Model.Price)</span></label> </div>
+        </div>
+        <img class="card-img-top img-fluid d-block mx-auto mb-3" src="@Constant.ImagePath@Model.Img" alt="Card image cap">
+        <div class="card-body p-0 px-3 row">
+
+            <div class="card-body px-3 pt-0 pb-1 pl-4 row">
+                <div class="col-6">
+                    <span class="badge p-1 border w-100" style="background-color:lavenderblush">Артикул: @Model.ArticleNumber</span>
+                </div>
+                <div class="col-6 border-0">
+                    <span class="badge p-1 border w-100" style="background-color:aliceblue">Ресурс, стр: @Model.Resource</span>
+                </div>
+            </div>
+
+            <div class="col-12 p-2">
+                <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-dark form-control btn-sm p-2" style="height:40px">Подробно</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,9 +5,12 @@ namespace ConsumablesSaleTest.Models
 {
     public enum Original
     {
-        [Display(Name = "Оригинал")]
+        [Display(Name = "Все")]
+        All,
+        [Display(Name = "Оригинальный")]
         Original,
         [Display(Name = "Совместимый")]
         Generic
+        
     }
 }

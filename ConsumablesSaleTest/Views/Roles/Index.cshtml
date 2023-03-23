@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ConsumablesSaleTest.Models.ViewModels.ChangeRoleVM>
+@using ConsumablesSaleTest.Models.ViewModels
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Список пользователей</h2>
+        </div>
+    </div>
+    <br />
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Имя
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Номер телефона
+                    </th>
+                    <th>
+                        Роли
+                    </th>
+                    <th>
+                        Действия
+                    </th>
+                    <th class="text-center">
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td width="20%">@user.UserFullName</td>
+                        <td width="20%">@user.UserEmail</td>
+                        <td width="20%">@user.UserPhoneNumber</td>
+                        <td width="20">@string.Join(" , ", user.UserRoles.ToList())</td>
+                        <td class="text-center">
+                            <div class="w-75 btn-group" role="group">
+                                <a class="btn btn-sm btn-primary mx-1" asp-action="Edit" asp-route-userid="@user.UserId">
+                                    <i class="lar la-lg la-edit"></i>
+                                </a>
+
+                                <a type="submit" class="btn btn-danger mx-1" asp-action="Delete" asp-route-id="@user.UserId" method="post">
+                                    <i class="lar la-lg la-trash-alt"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Список пуст</p>
+    }
+</div>
+
+
+
+                        </tr>

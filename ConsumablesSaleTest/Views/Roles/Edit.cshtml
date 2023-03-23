@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model ConsumablesSaleTest.Models.ViewModels.ChangeRoleVM
+
+<form method="post" asp-action="Edit">
+    <input type="hidden" name="userId" value="@Model.UserId" />
+
+    <div class="border p-3">
+        <div class="form-group row">
+            <div class="offset-1">
+                <h2 class="text-info pl-3">Изменение ролей для пользователя:<span> @Model.UserEmail</span> </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="offset-6 row">
+                    <div class="text-left">
+                        @foreach (IdentityRole role in Model.AllRoles)
+                        {
+                            <input type="checkbox" name="roles" value="@role.Name"
+                               @(Model.UserRoles.Contains(role.Name) ? "checked=\"checked\"" : "") />
+
+                            @role.Name <br />
+                        }
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+                        <div class="col">
+                            <input type="submit" class="btn btn-info w-100" value="Сохранить" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success w-100">Отменить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<button type="submit" class="btn btn-primary">Сохранить</button>
+    <div class="col">
+    <a asp-action="Index" class="btn btn-success w-100">Отменить</a>
+    </div>*@
+</form>
+

@@ -22,10 +22,10 @@ namespace ConsumablesSaleTest.Models
         public string Img { get; set; }
         [Required(ErrorMessage = "Необходимо выбрать тип расходника")]
         public virtual Original Original { get; set; }
-        [Display(Name= "Type type")]
-        public int TypeId { get; set; }
-        [ForeignKey("TypeId")]
-        public virtual Type Type { get; set; }
+        [Display(Name= "TypeProd typeProd")]
+        public int TypeProdId { get; set; }
+        [ForeignKey("TypeProdId")]
+        public virtual TypeProd TypeProd { get; set; }
         [Display(Name = "Developer type")]
         public int DeveloperId { get; set; }
         [ForeignKey("DeveloperId")]
